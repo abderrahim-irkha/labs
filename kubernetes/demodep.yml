@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: demodep
+  name: demodep
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: demodep
+  template:
+    metadata:
+      labels:
+        app: demodep
+    spec:
+      containers:
+        - image: httpd:2.4.69-alpine
+          name: httpd
+          command: ["/bin/bash", "-c"]
+          args: ["sleep 5", "exit 1"]
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  

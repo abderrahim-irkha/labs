@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: demodep
+  name: demodep
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: demodep
+  template:
+    metadata:
+      labels:
+        app: demodep
+    spec:
+      containers:
+        - image: httpd:2.4.69-alpine
+          name: httpd
+  strategy:
+    type: Recreate
